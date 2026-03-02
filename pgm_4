@@ -1,0 +1,29 @@
+4. Write a program to demonstrate the ID3 decision tree algorithm using an
+appropriate dataset for classification.
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+from sklearn.model_selection import train_test_split
+from sklearn import datasets
+# Load a sample dataset
+iris = datasets.load_iris()
+X = iris.data[:, :2] # Taking only two features for visualization
+y = iris.target
+# Split the dataset
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# Train the ID3 Decision Tree model
+id3_tree = DecisionTreeClassifier(criterion='entropy', random_state=42)
+id3_tree.fit(X_train, y_train)
+# Visualize the Decision Tree
+plt.figure(figsize=(12, 8))
+plot_tree(id3_tree, feature_names=iris.feature_names[:2],
+class_names=iris.target_names, filled=True)
+plt.title("ID3 Decision Tree Visualization")
+plt.show()
+# Model Accuracy
+accuracy = id3_tree.score(X_test, y_test)
+print(f"Model Accuracy: {accuracy * 100:.2f}%")
+
+
+OUTPUT:
