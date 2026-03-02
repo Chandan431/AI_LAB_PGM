@@ -1,0 +1,32 @@
+2. Develop a program to implement a Support Vector Machine for binary
+classification. Use a sample dataset and visualize the decision boundary.
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from mlxtend.plotting import plot_decision_regions
+# Generate a sample dataset
+X, y = datasets.make_classification(n_samples=100, n_features=2, n_classes=2,
+n_clusters_per_class=1, n_redundant=0, random_state=42)
+# Split the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# Train an SVM classifier
+svm = SVC(kernel='linear', C=1.0)
+svm.fit(X_train, y_train)
+# Plot decision boundary
+plt.figure(figsize=(8, 6))
+plot_decision_regions(X, y, clf=svm, legend=2)
+plt.xlabel("Feature 1")
+plt.ylabel("Feature 2")
+plt.title("SVM Decision Boundary")
+plt.show()
+# Print model accuracy
+ALGORITHMS & AI LABORATORY | 2024-25
+Dept. of CS&E, SJMIT, Chitradurga. Page 5
+accuracy = svm.score(X_test, y_test)
+print(f"Model Accuracy: {accuracy * 100:.2f}%")
+
+
+OUTPUT
+Model Accuracy: 100.00%
